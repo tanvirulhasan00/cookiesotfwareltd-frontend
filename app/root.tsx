@@ -9,6 +9,18 @@ import {
 
 import type { Route } from "./+types/root";
 import "./app.css";
+import NotFound from "./components/NotFound";
+
+export function meta({}: Route.MetaArgs) {
+  return [
+    { title: "Cookie Software Ltd." },
+    {
+      name: "description",
+      content:
+        "Cookie Software Ltd. delivers innovative software solutions for businesses worldwide. Specializing in custom web & mobile app development, SaaS platforms, and scalable digital tools. Partner with experts to turn your vision into reality.",
+    },
+  ];
+}
 
 export const links: Route.LinksFunction = () => [
   { rel: "preconnect", href: "https://fonts.googleapis.com" },
@@ -63,13 +75,7 @@ export function ErrorBoundary({ error }: Route.ErrorBoundaryProps) {
 
   return (
     <main className="pt-16 p-4 container mx-auto">
-      <h1>{message}</h1>
-      <p>{details}</p>
-      {stack && (
-        <pre className="w-full p-4 overflow-x-auto">
-          <code>{stack}</code>
-        </pre>
-      )}
+      <NotFound message={message} details={details} stack={stack} />
     </main>
   );
 }
